@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
+import router from './router/routers'
+import './router/index'
 import store from './store'
 import './plugins/iview.js'
+import '@/styles/common.css'
 
 Vue.config.productionTip = false
 
