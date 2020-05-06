@@ -4,9 +4,9 @@
     <Menu mode="horizontal" :theme="theme1" active-name="1">
       <!-- 左侧菜单 -->
       <div class="left-menu-item">
-        <MenuItem name="0">
-        <Logo></Logo>
-        </MenuItem>
+        <router-link to="home">
+          <Logo></Logo>
+        </router-link>
         <MenuItem name="1">
         <Icon type="ios-paper" />
         二手交易
@@ -94,7 +94,7 @@ export default {
   watch: {
     // 根据学校名字长度动态计算学校选择器的长度
     school: function (newVal, oldVal) {
-      // TODO: 这里可能会有问题,const
+      // TODO: 这里可能会有性能问题,const
       const length = newVal.length
       this.selectWidth = 'width:' + (15 * length + 30) + 'px'
     }
@@ -106,6 +106,15 @@ export default {
 .ivu-menu {
   display: flex;
   justify-content: space-between;
+  padding: 0 25px;
+
+  .left-menu-item {
+    display: flex;
+
+    .logo {
+      margin-right: 15px;
+    }
+  }
 
   .right-menu-item {
     display: flex;
@@ -117,6 +126,7 @@ export default {
       justify-content: space-between;
       padding: 0 25px;
 
+  // TODO: 这里可能会有性能问题,标签选择器
       p {
         line-height: 30px;
         margin-top: 7px;
@@ -148,7 +158,7 @@ export default {
     }
 
     .login-menu {
-      margin-right: 35px;
+      margin-right: 25px;
 
       .ivu-avatar {
         margin-right: 10px;

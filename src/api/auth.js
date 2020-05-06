@@ -1,6 +1,14 @@
 import request from '@/utils/request'
 
-export function login (loginForm) {
+export function loginWithCode (loginForm) {
+  return request({
+    url: 'auth/login',
+    method: 'post',
+    data: loginForm
+  })
+}
+
+export function loginWithPass (loginForm) {
   return request({
     url: 'auth/login',
     method: 'post',

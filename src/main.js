@@ -5,8 +5,10 @@ import './router/index'
 import store from './store'
 import './plugins/iview.js'
 import '@/styles/common.css'
+import animate from 'animate.css'
 
 Vue.config.productionTip = false
+Vue.use(animate)
 
 new Vue({
   router,
