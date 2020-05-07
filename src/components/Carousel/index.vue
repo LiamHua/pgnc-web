@@ -1,6 +1,6 @@
 <template>
   <div class="carousel">
-    <Carousel autoplay height="440px" loop radius-dot>
+    <Carousel autoplay height="440px" autoplay-speed="3000" loop radius-dot>
       <CarouselItem v-for="(item, index) in carouseItem" :key="index">
         <div class="carousel-item">
           <a :href="item.toLink">
