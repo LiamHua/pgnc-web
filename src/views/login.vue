@@ -164,6 +164,7 @@ export default {
 <style lang="scss" scoped>
 .login-container {
   height: 100vh;
+  overflow: hidden;
   background: no-repeat url("http://cdn.pgnc.huazai.fun/Swiss-winter.jpg");
   background-size: cover;
   display: flex;
@@ -216,7 +217,7 @@ export default {
 
     .btn-item {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
     }
 
     .ivu-btn:hover {
