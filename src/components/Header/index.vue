@@ -1,10 +1,10 @@
 <template>
   <!-- 顶部菜单 -->
   <div class="header">
-    <Menu mode="horizontal" :theme="theme1" active-name="1">
+    <Menu mode="horizontal" active-name="1">
       <!-- 左侧菜单 -->
       <div class="left-menu-item">
-        <router-link to="home">
+        <router-link to="home" style="color: #3a3a3a">
           <Logo></Logo>
         </router-link>
         <MenuItem name="1">
@@ -27,13 +27,13 @@
       </div>
       <!-- 右侧菜单 -->
       <div class="right-menu-item">
-        <Submenu name="">
+        <Submenu name="4">
           <template slot="title">
             <Icon type="ios-stats" />
             发布
           </template>
           <div class="publish-item">
-            <MenuItem>
+            <MenuItem name="4-1">
             <div class="publish-item-sell">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-sell"></use>
@@ -41,7 +41,7 @@
               <p>二手寄卖</p>
             </div>
             </MenuItem>
-            <MenuItem>
+            <MenuItem name="4-2">
             <div class="publish-item-buy">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-buy"></use>
@@ -52,7 +52,7 @@
           </div>
         </Submenu>
         <!-- 学校选择器 -->
-        <Select v-model="school" :style="selectWidth" filterable size="samll" not-found-text="当前没有学校">
+        <Select v-model="school" :style="selectWidth" filterable not-found-text="当前没有学校">
           <Option v-for="item in schoolList" :value="item.value" :key="item.value">{{ item.label }}</Option>
         </Select>
         <!-- 登录 -->
@@ -126,7 +126,7 @@ export default {
       justify-content: space-between;
       padding: 0 25px;
 
-  // TODO: 这里可能会有性能问题,标签选择器
+      // TODO: 这里可能会有性能问题,标签选择器
       p {
         line-height: 30px;
         margin-top: 7px;
