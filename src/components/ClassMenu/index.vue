@@ -473,7 +473,7 @@ export default {
   position: absolute;
   background-color: #fff;
   left: 165px;
-  z-index: 2;
+  z-index: 100;
 
   .class-menu-secondary-container {
     padding: 10px 10px;
