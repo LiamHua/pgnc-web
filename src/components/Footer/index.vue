@@ -47,7 +47,7 @@ export default {
 .footer {
   color: #999;
   line-height: 35px;
-  // height: 285px;
+  height: 285px;
 
   .footer-up-wrapper {
     background-color: #282c36;
@@ -58,7 +58,12 @@ export default {
     display: flex;
     justify-content: space-between;
 
+    .contact {
+      width: 200px;
+    }
+
     .wechat {
+      width: 200px;
       text-align: center;
 
       img {
@@ -67,7 +72,7 @@ export default {
     }
     .assistant {
       text-align: center;
-      width: 120px;
+      width: 200px;
 
       .love-open-source {
         font-size: 20px;
@@ -77,7 +82,7 @@ export default {
 
       .open-source-wrapper {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
 
         .open-source {
           color: #999;
