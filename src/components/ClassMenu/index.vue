@@ -435,13 +435,14 @@ export default {
 
 .class-menu-top-wrapper {
   overflow: hidden;
-  width: 145px;
+  width: 165px;
 }
 
 .class-menu-top {
   height: 440px;
-  width: 160px;
+  width: 180px;
   background-color: #2b333b;
+  border-radius: 8px;
   color: hsla(0, 0%, 100%, 0.6);
   padding-top: 10px;
   overflow-x: hidden;
@@ -450,6 +451,7 @@ export default {
   .class-menu-top-item {
     height: 45px;
     line-height: 45px;
+    margin-left: 7px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -470,7 +472,7 @@ export default {
   padding: 15px 15px;
   position: absolute;
   background-color: #fff;
-  left: 145px;
+  left: 165px;
   z-index: 2;
 
   .class-menu-secondary-container {
