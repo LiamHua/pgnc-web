@@ -2,8 +2,8 @@
   <div class="class-menu">
     <div class="class-menu-top-wrapper">
       <div class="class-menu-top">
-        <ul v-for="(item, index) in menu" :key="index" @mouseover="handleShowSecondaryMenu(item)" @mouseout="handleHiddenSecondaryMenu">
-          <li class="class-menu-top-item">
+        <ul>
+          <li class="class-menu-top-item" v-for="(item, index) in menu" :key="index" @mouseover="handleShowSecondaryMenu(item)" @mouseout="handleHiddenSecondaryMenu">
             {{item.topMenu.name}}
             <Icon type="md-arrow-dropright" size="18" />
           </li>
@@ -451,11 +451,10 @@ export default {
   .class-menu-top-item {
     height: 45px;
     line-height: 45px;
-    margin-left: 7px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10px;
+    padding: 0 10px 0 15px;
     cursor: pointer;
     user-select: none;
   }
