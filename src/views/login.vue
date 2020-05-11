@@ -203,6 +203,7 @@ export default {
       color: #2b719e;
       // color: #2c9a50;
       user-select: none;
+      display: inline-block;
     }
 
     .ivu-btn {
