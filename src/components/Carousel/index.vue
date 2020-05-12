@@ -45,6 +45,7 @@ export default {
 .ivu-carousel-item {
   display: flex;
   justify-content: center;
+  height: 440px;
 
   a {
     display: block;
