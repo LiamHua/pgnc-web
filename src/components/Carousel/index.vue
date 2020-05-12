@@ -19,8 +19,8 @@ export default {
       carouseItem: [
         {
           id: '',
-          toLink: 'https://www.huazai.fun',
-          imgLink: 'http://img.netbian.com/file/2015/0907/ec2b5261ee74080a832511c13c4de111.jpg',
+          toLink: 'https://www.cnblogs.com/studywithme/',
+          imgLink: 'http://cdn.pgnc.huazai.fun/background1.png',
           comment: ''
         },
         {
