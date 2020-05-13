@@ -1,26 +1,31 @@
-import router from './routers'
-import { verifyToken } from '@/api/auth'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import userRoutes from './modules/user'
 
-router.beforeEach((to, from, next) => {
-  /* 路由发生变化修改页面title */
-  if (to.meta.title) {
-    document.title = to.meta.title
-  }
-  next()
-})
+Vue.use(VueRouter)
 
-router.beforeEach((to, from, next) => {
-  if (to.path === '/admin') {
-    if (window.sessionStorage.token) {
-      if (verifyToken(window.sessionStorage.token)) {
-        next()
-      } else {
-        next('login')
+const router = new VueRouter({
+  routes: [
+    userRoutes,
+    {
+      path: '/',
+      redirect: '/home'
+    },
+    {
+      path: '/home',
+      component: () => import('@/views/Home'),
+      meta: {
+        title: '飞鸽校园'
       }
-    } else {
-      next('/login')
+    },
+    {
+      path: '/login',
+      component: () => import('@/views/Login'),
+      meta: {
+        title: '登录-飞鸽校园'
+      }
     }
-  } else {
-    next()
-  }
+  ]
 })
+
+export default router
