@@ -31,3 +31,19 @@ export function verifyToken (token) {
     data: { token }
   })
 }
+
+export function gerUserInfo () {
+  return request({
+    url: 'auth/getUserInfo',
+    method: 'get',
+    data: {}
+  })
+}
+
+export function saveUserInfo (user) {
+  return request({
+    url: 'auth/saveUserInfo',
+    method: 'put',
+    data: { user }
+  })
+}
