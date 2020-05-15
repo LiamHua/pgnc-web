@@ -69,6 +69,7 @@
 import Logo from '@/components/Logo'
 
 export default {
+  name: 'TheHeader',
   components: {
     Logo
   },
@@ -103,6 +104,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.header {
+  position: relative;
+}
 .ivu-menu {
   display: flex;
   justify-content: space-between;
