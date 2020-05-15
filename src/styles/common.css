@@ -7,6 +7,12 @@ body {
     flex-direction: column;
 } */
 
+body
+{
+margin:0;
+padding:0;
+}
+
 .icon {
   width: 1em;
   height: 1em;
