@@ -1,26 +1,28 @@
 <template>
   <div class="home">
-    <Header></Header>
-    <div class="content">
-      <div class="top-nav">
-        <ClassMenu></ClassMenu>
-        <Carousel class="tcarousel"></Carousel>
+    <the-header></the-header>
+    <div class="content-container">
+      <div class="content">
+        <div class="top-nav">
+          <ClassMenu></ClassMenu>
+          <Carousel class="carousel"></Carousel>
+        </div>
       </div>
     </div>
-    <Footer></Footer>
+    <the-footer></the-footer>
   </div>
 </template>
 
 <script>
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import TheHeader from '@/components/TheHeader'
+import TheFooter from '@/components/TheFooter'
 import ClassMenu from '@/components/ClassMenu'
 import Carousel from '@/components/Carousel'
 
 export default {
   components: {
-    Header,
-    Footer,
+    TheHeader,
+    TheFooter,
     ClassMenu,
     Carousel
   }
@@ -28,17 +30,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.content {
-  min-height: calc(100vh - 285px - 60px);
-  width: 60vw;
-  margin: 30px auto;
-}
-
 .top-nav {
   display: flex;
   justify-content: flex-start;
 
-  .tcarousel {
+  .carousel {
     width: calc(60vw - 165px);
   }
 }
