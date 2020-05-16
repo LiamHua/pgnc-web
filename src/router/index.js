@@ -20,7 +20,7 @@ const router = new VueRouter({
     },
     {
       path: '/login',
-      component: () => import('@/views/Login'),
+      component: () => import('@/views/UserInit'),
       meta: {
         title: '登录-飞鸽校园'
       }
