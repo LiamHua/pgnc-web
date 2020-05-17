@@ -133,7 +133,7 @@ export default {
 
 <style lang="scss" scoped>
 .register {
-  width: auto;
+  width: 500px;
   height: 300px;
   text-align: center;
 

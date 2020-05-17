@@ -8,7 +8,7 @@
       </FormItem>
       <!-- 密码或验证码 -->
       <FormItem :prop="loginConfig.currentWay === 'PASSWORD' ? 'password' : 'code'">
-        <Input class="number" :placeholder="loginConfig.currentWay === 'PASSWORD' ? '密码' : '验证码'" :type="loginConfig.currentWay === 'PASSWORD' ? 'password' : 'number'" v-model="loginForm.code" maxlength="15" />
+        <Input class="number" :placeholder="loginConfig.currentWay === 'PASSWORD' ? '密码' : '验证码'" :type="loginConfig.currentWay === 'PASSWORD' ? 'password' : 'number'" maxlength="15" v-model="loginForm.code" />
       </FormItem>
       <!-- 切换登陆方式 -->
       <span @click="switchLoginWay" class="switch-login-way">使用{{ loginConfig.way }}登录</span>
@@ -43,8 +43,7 @@ export default {
       loginForm: {
         tel: '',
         // 可以是验证码，也可以是密码
-        code: '',
-        way: ''
+        code: ''
       },
       // 登录表单格式校验规则
       loginFormRules: {
@@ -65,11 +64,10 @@ export default {
   methods: {
     // 登录
     handleLogin () {
+      console.log(this.loginForm.code)
       // 登录前校验
       this.$refs.loginFormRef.validate(async status => {
         if (!status) return this.$Message.error('格式错误！')
-        // 确定登录方式
-        this.loginForm.way = this.loginConfig.currentWay
         // 发起登录请求
         if (this.loginConfig.currentWay === 'PASSWORD') {
           // 深拷贝实现解除双向绑定
@@ -140,7 +138,7 @@ export default {
 
 <style lang="scss" scoped>
 .login {
-  width: auto;
+  width: 500px;
   height: 300px;
   text-align: center;
 
