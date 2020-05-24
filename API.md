@@ -20,7 +20,7 @@
   method: 'post',
   data: {
     registerForm: {
-			nickname: '',  // 2-10位字符
+    	nickname: '',  // 2-10位字符
     	username: '',  // 11位手机号
     	password: '',  // 经md5加密的32位密码
     	sms: ''        // 4位数验证码
@@ -35,7 +35,7 @@
 
 + 密码登陆
 
-```json
+```
 {
   url: 'auth/loginWithPassword',
   method: 'post',
@@ -67,7 +67,7 @@
 
 ### 3. 获取短信验证码
 
-```json
+```
 {
   url: 'auth/getSMS',
   method: 'get',
@@ -81,7 +81,7 @@
 
 ### 4. 获取用户个人信息
 
-```json
+```
 {
   url: 'auth/getUserInfo',
   method: 'get',
@@ -95,7 +95,7 @@
 
 ### 5. 保存个人信息
 
-```json
+```js
 {
   url: 'auth/saveUserInfo',
   method: 'get',
