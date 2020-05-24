@@ -14,7 +14,7 @@
 
 ### 1. 注册
 
-```json
+```
 {
   url: 'auth/register',
   method: 'post',
