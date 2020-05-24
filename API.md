@@ -14,7 +14,7 @@
 
 ### 1. 注册
 
-```
+```js
 {
   url: 'auth/register',
   method: 'post',
@@ -35,13 +35,13 @@
 
 + 密码登陆
 
-```
+```js
 {
   url: 'auth/loginWithPassword',
   method: 'post',
   data: {
     loginForm: {
-			username: '',  // 11位手机号
+      username: '',  // 11位手机号
     	password: ''   // 经md5加密的32位密码
     } 
   }
@@ -50,7 +50,7 @@
 
 + 短信验证码登陆
 
-```json
+```js
 {
   url: 'auth/loginWithSMS',
   method: 'post',
@@ -67,7 +67,7 @@
 
 ### 3. 获取短信验证码
 
-```
+```js
 {
   url: 'auth/getSMS',
   method: 'get',
@@ -81,7 +81,7 @@
 
 ### 4. 获取用户个人信息
 
-```
+```js
 {
   url: 'auth/getUserInfo',
   method: 'get',
@@ -101,7 +101,7 @@
   method: 'get',
   data: {
     userInfo: {
-			avatar: {},    // 用户头像
+      avatar: {},    // 用户头像
       nickname: '',  // 用户昵称
       name: '',      // 真实姓名
       school: '',    // 学校
@@ -119,7 +119,7 @@
 
 ### 1. 获取主页分类菜单
 
-```json
+```js
 {
   url: 'api/getMenu',
   method: 'get',
@@ -133,7 +133,7 @@
 
 ### 2. 获取轮播图
 
-```json
+```js
 {
   url: 'api/getCarousel',
   method: 'get',
