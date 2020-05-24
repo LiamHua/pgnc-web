@@ -57,7 +57,7 @@
   data: {
     loginForm: {
       username: '',   // 11位手机号
-    	sms: ''         // 4位验证码
+      sms: ''         // 4位验证码
     }
   }
 }
