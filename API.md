@@ -42,7 +42,7 @@
   data: {
     loginForm: {
       username: '',  // 11位手机号
-    	password: ''   // 经md5加密的32位密码
+      password: ''   // 经md5加密的32位密码
     } 
   }
 }
@@ -56,7 +56,7 @@
   method: 'post',
   data: {
     loginForm: {
-			username: '',   // 11位手机号
+      username: '',   // 11位手机号
     	sms: ''         // 4位验证码
     }
   }
