@@ -1,16 +1,11 @@
-/* html {
-    height: 100%;
+html {
+  height: 100%;
 }
-body {
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-} */
 
-body
-{
-margin:0;
-padding:0;
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
 }
 
 .icon {
