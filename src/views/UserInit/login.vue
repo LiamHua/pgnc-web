@@ -1,31 +1,42 @@
 <template>
   <div class="login">
     <!-- 登陆信息表单 -->
-    <Form :model="loginForm" :rules="loginFormRules" ref="loginFormRef">
+    <Form :model="loginFormWithPass" :rules="loginFormRules" ref="loginFormWithPassRef" v-show="loginConfig.currentWay === 'PASSWORD'">
       <!-- 用户账号（手机号） -->
       <FormItem prop="tel">
-        <Input class="number" placeholder="手机号" type="number" maxlength="11" v-model="loginForm.tel" />
+        <Input class="number" placeholder="手机号" type="number" maxlength="11" v-model="loginFormWithPass.tel" />
       </FormItem>
       <!-- 密码或验证码 -->
-      <FormItem :prop="loginConfig.currentWay === 'PASSWORD' ? 'password' : 'code'">
-        <Input class="number" :placeholder="loginConfig.currentWay === 'PASSWORD' ? '密码' : '验证码'" :type="loginConfig.currentWay === 'PASSWORD' ? 'password' : 'number'" maxlength="15" v-model="loginForm.code" />
+      <!-- ！！！prop必须与v-model绑定的值一致，不然会出现值为空的情况 -->
+      <FormItem prop="password">
+        <Input placeholder="密码" type="password" maxlength="15" v-model="loginFormWithPass.password" />
       </FormItem>
-      <!-- 切换登陆方式 -->
-      <span @click="switchLoginWay" class="switch-login-way">使用{{ loginConfig.way }}登录</span>
-      <!-- 获取验证码与提交登陆按钮 -->
-      <div class="submit">
-        <Button @click="handleGetCode" id="get-code" type="primary" v-show="loginConfig.currentWay === 'CODE'">获取验证码</Button>
-        <Button class="animate__animated animate__rollIn" @click="handleLogin" key="login" type="primary">登录</Button>
-      </div>
-      <!-- 无账号，去注册 -->
-      <span @click="switchToRegister" class="switch-to-register">没有账号，立即注册</span>
     </Form>
+    <Form :model="loginFormWithSMS" :rules="loginFormRules" ref="loginFormWithSMSRef" v-show="loginConfig.currentWay === 'CODE'">
+      <!-- 用户账号（手机号） -->
+      <FormItem prop="tel">
+        <Input class="number" placeholder="手机号" type="number" maxlength="11" v-model="loginFormWithSMS.tel" />
+      </FormItem>
+      <!-- ！！！prop必须与v-model绑定的值一致，不然会出现值为空的情况 -->
+      <FormItem prop="sms">
+        <Input class="number" placeholder="验证码" type="number" maxlength="4" v-model="loginFormWithSMS.sms" />
+      </FormItem>
+    </Form>
+    <!-- 切换登陆方式 -->
+    <span @click="switchLoginWay" class="switch-login-way">使用{{ loginConfig.way }}登录</span>
+    <!-- 获取验证码与提交登陆按钮 -->
+    <div class="submit">
+      <Button @click="handleGetCode" id="get-code" type="primary" v-show="loginConfig.currentWay === 'CODE'">获取验证码</Button>
+      <Button class="animate__animated animate__rollIn" @click="handleLogin" key="login" type="primary">登录</Button>
+    </div>
+    <!-- 无账号，去注册 -->
+    <span @click="switchToRegister" class="switch-to-register">没有账号，立即注册</span>
   </div>
 </template>
 
 <script>
 import md5 from 'md5'
-import { loginWithCode, getCode } from '@/api/auth'
+import { loginWithPassword, loginWithSMS, getCode } from '@/api/auth'
 import { telRule, passwordRule, codeRule } from '@/utils/rules.js'
 const setting = require('../../settings')
 
@@ -40,10 +51,14 @@ export default {
   data () {
     return {
       // 登录表单
-      loginForm: {
+      loginFormWithPass: {
         tel: '',
-        // 可以是验证码，也可以是密码
-        code: ''
+        nickname: 'huhuh',
+        password: ''
+      },
+      loginFormWithSMS: {
+        tel: '',
+        sms: ''
       },
       // 登录表单格式校验规则
       loginFormRules: {
@@ -63,32 +78,49 @@ export default {
   },
   methods: {
     // 登录
-    handleLogin () {
-      console.log(this.loginForm.code)
+    async handleLogin () {
       // 登录前校验
-      this.$refs.loginFormRef.validate(async status => {
-        if (!status) return this.$Message.error('格式错误！')
-        // 发起登录请求
-        if (this.loginConfig.currentWay === 'PASSWORD') {
+      if (this.loginConfig.currentWay === 'PASSWORD') {
+        this.$refs.loginFormWithPassRef.validate(async status => {
+          if (!status) return this.$Message.error('格式错误！')
+          // 发起登录请求
           // 深拷贝实现解除双向绑定
-          const loginForm = JSON.parse(JSON.stringify(this.LoginForm))
+          const loginForm = JSON.parse(JSON.stringify(this.loginFormWithPass))
           // 加密
           loginForm.password = md5(loginForm.password)
-        }
-        const { data: res } = await loginWithCode(this.loginForm)
-          .then(() => {
-            if (res.code !== 200) return this.$Message.error(res.msg)
-            window.sessionStorage.setItem('token', res.data.token)
-            this.$Message.success(res.msg)
-            this.$router.push('/home')
-          })
-          .catch(err => {
-            if (err) {
-              console.log(err.stack)
-            }
-            return this.$Message.error('服务器异常，请联系管理员!')
-          })
-      })
+          const { data: res } = await loginWithPassword(loginForm)
+            .then(() => {
+              if (res.code !== 200) return this.$Message.error(res.msg)
+              // window.sessionStorage.setItem('token', res.data.token)
+              this.$Message.success(res.msg)
+              this.$router.push('/home')
+            })
+            .catch(err => {
+              if (err) {
+                console.log(err.stack)
+              }
+              return this.$Message.error('服务器异常，请联系管理员!')
+            })
+        })
+      } else {
+        this.$refs.loginFormWithSMSRef.validate(async status => {
+          if (!status) return this.$Message.error('格式错误！')
+          // 发起登录请求
+          const { data: res } = await loginWithSMS(this.loginFormWithSMS)
+            .then(() => {
+              if (res.code !== 200) return this.$Message.error(res.msg)
+              window.sessionStorage.setItem('token', res.data.token)
+              this.$Message.success(res.msg)
+              this.$router.push('/home')
+            })
+            .catch(err => {
+              if (err) {
+                console.log(err.stack)
+              }
+              return this.$Message.error('服务器异常，请联系管理员!')
+            })
+        })
+      }
     },
     // 获取验证码
     async handleGetCode () {
