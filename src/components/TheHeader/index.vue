@@ -33,7 +33,7 @@
             发布
           </template>
           <div class="publish-item">
-            <MenuItem name="4-1">
+            <MenuItem name="4-1" to="publish">
             <div class="publish-item-sell">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-sell"></use>
@@ -41,7 +41,7 @@
               <p>二手寄卖</p>
             </div>
             </MenuItem>
-            <MenuItem name="4-2">
+            <MenuItem name="4-2" to="demand">
             <div class="publish-item-buy">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-buy"></use>
