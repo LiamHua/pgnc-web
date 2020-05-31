@@ -24,6 +24,20 @@ const router = new VueRouter({
       meta: {
         title: '登录-飞鸽校园'
       }
+    },
+    {
+      path: '/publish',
+      component: () => import('@/views/PublishCommodity'),
+      meta: {
+        title: '发布商品'
+      }
+    },
+    {
+      path: '/demand',
+      component: () => import('@/views/Demand'),
+      meta: {
+        title: '求购商品'
+      }
     }
   ]
 })
