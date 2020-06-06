@@ -95,12 +95,6 @@ export default {
               this.$Message.success(res.msg)
               this.$router.push('/home')
             })
-            .catch(err => {
-              if (err) {
-                console.log(err.stack)
-              }
-              return this.$Message.error('服务器异常，请联系管理员!')
-            })
         })
       } else {
         this.$refs.loginFormWithSMSRef.validate(async status => {
@@ -112,12 +106,6 @@ export default {
               window.sessionStorage.setItem('token', res.data.token)
               this.$Message.success(res.msg)
               this.$router.push('/home')
-            })
-            .catch(err => {
-              if (err) {
-                console.log(err.stack)
-              }
-              return this.$Message.error('服务器异常，请联系管理员!')
             })
         })
       }
@@ -145,12 +133,6 @@ export default {
               this.handleSendCode()
             }, 1000)
           }
-        })
-        .catch(err => {
-          if (err) {
-            console.log(err)
-          }
-          return this.$Message.error('服务器异常，请联系管理员!')
         })
     },
     // 切换登录方式
