@@ -38,6 +38,13 @@ const router = new VueRouter({
       meta: {
         title: '求购商品'
       }
+    },
+    {
+      path: '/product-info',
+      component: () => import('@/views/ProductInfo'),
+      meta: {
+        title: '商品详情'
+      }
     }
   ]
 })
