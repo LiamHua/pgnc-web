@@ -42,6 +42,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.carousel {
+    background-color: #fff;
+}
+
 .ivu-carousel-item {
   display: flex;
   justify-content: center;
@@ -53,6 +57,7 @@ export default {
 
   img {
     height: 440px;
+    width: auto;
   }
 }
 </style>
