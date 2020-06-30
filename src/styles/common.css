@@ -21,11 +21,20 @@ ul {
 }
 .content-container {
   min-height: calc(100vh - 285px - 60px - 60px);
-  width: 60vw;
+  width: 70vw;
+  min-width: 1230px;
   margin: 30px auto;
-  background-color: #fff;
+  background-color: #f8f8f8;
   display: flex;
   position: relative;
+}
+
+.backgroundWhite {
+  background-color: #fff;
+}
+
+.backgroundGray {
+    background-color: #f8f8f8;
 }
 
 /*在谷歌下移除input[number]的上下箭头*/
@@ -38,3 +47,7 @@ ul {
 .number input[type="number"] {
   -moz-appearance:textfield;
 }
+
+  .ivu-divider-horizontal {
+    margin: 0;
+  }
