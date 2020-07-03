@@ -37,6 +37,11 @@ ul {
     background-color: #f8f8f8;
 }
 
+.width55vw {
+   width: 55vw;
+   min-width: 800px;
+}
+
 /*在谷歌下移除input[number]的上下箭头*/
 .number input[type='number']::-webkit-outer-spin-button,
 .number input[type='number']::-webkit-inner-spin-button {
