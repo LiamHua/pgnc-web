@@ -11,7 +11,7 @@
         <Icon type="ios-paper" />
         二手交易
         </MenuItem>
-        <MenuItem name="2">
+        <MenuItem name="2" to="need">
         <Icon type="ios-people" />
         物品求购
         </MenuItem>
