@@ -76,7 +76,7 @@ export default {
 
       .love-open-source {
         font-size: 20px;
-        font-family: "YouYuan208e8798a821b1b";
+        font-family:'jdzhonyuanjian21ba195d8a21b1b';
         margin-bottom: 20px;
       }
 

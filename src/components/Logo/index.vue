@@ -34,7 +34,7 @@ export default {
     justify-content: center;
 
     .logo-site-name {
-      font-family: "LiDeBiao-Xing3208533b73821b1b";
+      font-family:'LiDeBiao-Xing321ba12473821b1b';
       font-size: 15px;
     }
 
