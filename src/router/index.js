@@ -45,6 +45,13 @@ const router = new VueRouter({
       meta: {
         title: '商品详情'
       }
+    },
+    {
+      path: '/need',
+      component: () => import('@/views/BuyMessage'),
+      meta: {
+        title: '物品求购'
+      }
     }
   ]
 })
