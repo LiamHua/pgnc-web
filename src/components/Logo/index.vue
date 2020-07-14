@@ -2,7 +2,7 @@
   <div class="logo">
     <img class="logo-img" src="../../assets/logo.png" alt="logo">
     <div class="logo-site">
-      <p class="logo-site-name">飞鸽校园测试</p>
+      <p class="logo-site-name">飞鸽校园</p>
       <p class="logo-site-address">pgnc.huazai.fun</p>
     </div>
   </div>
