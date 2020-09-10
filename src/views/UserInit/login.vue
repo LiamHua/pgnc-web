@@ -3,8 +3,8 @@
     <!-- 登陆信息表单 -->
     <Form :model="loginFormWithPass" :rules="loginFormRules" ref="loginFormWithPassRef" v-show="loginConfig.currentWay === 'PASSWORD'">
       <!-- 用户账号（手机号） -->
-      <FormItem prop="tel">
-        <Input class="number" placeholder="手机号" type="number" maxlength="11" v-model="loginFormWithPass.tel" />
+      <FormItem prop="telephone">
+        <Input class="number" placeholder="手机号" type="number" maxlength="11" v-model="loginFormWithPass.telephone" />
       </FormItem>
       <!-- 密码或验证码 -->
       <!-- ！！！prop必须与v-model绑定的值一致，不然会出现值为空的情况 -->
@@ -12,10 +12,10 @@
         <Input placeholder="密码" type="password" maxlength="15" v-model="loginFormWithPass.password" />
       </FormItem>
     </Form>
-    <Form :model="loginFormWithSMS" :rules="loginFormRules" ref="loginFormWithSMSRef" v-show="loginConfig.currentWay === 'CODE'">
+    <Form :model="loginFormWithSMS" :rules="loginFormRules" ref="loginFormWithSMSRef" v-show="loginConfig.currentWay === 'SMS'">
       <!-- 用户账号（手机号） -->
-      <FormItem prop="tel">
-        <Input class="number" placeholder="手机号" type="number" maxlength="11" v-model="loginFormWithSMS.tel" />
+      <FormItem prop="telephone">
+        <Input class="number" placeholder="手机号" type="number" maxlength="11" v-model="loginFormWithSMS.telephone" />
       </FormItem>
       <!-- ！！！prop必须与v-model绑定的值一致，不然会出现值为空的情况 -->
       <FormItem prop="sms">
@@ -26,7 +26,7 @@
     <span @click="switchLoginWay" class="switch-login-way">使用{{ loginConfig.way }}登录</span>
     <!-- 获取验证码与提交登陆按钮 -->
     <div class="submit">
-      <Button @click="handleGetCode" id="get-code" type="primary" v-show="loginConfig.currentWay === 'CODE'">获取验证码</Button>
+      <Button @click="handleGetSMS" id="get-sms" type="primary" v-show="loginConfig.currentWay === 'SMS'">获取验证码</Button>
       <Button class="animate__animated animate__rollIn" @click="handleLogin" key="login" type="primary">登录</Button>
     </div>
     <!-- 无账号，去注册 -->
@@ -36,8 +36,8 @@
 
 <script>
 import md5 from 'md5'
-import { loginWithPassword, loginWithSMS, getCode } from '@/api/auth'
-import { telRule, passwordRule, codeRule } from '@/utils/rules.js'
+import { loginWithPassword, loginWithSMS, getSMS } from '@/api/auth'
+import { telRule, passwordRule, smsRule } from '@/utils/rules.js'
 const setting = require('../../settings')
 
 export default {
@@ -46,29 +46,28 @@ export default {
     // 初始化登录方式
     this.loginConfig.way = setting.defaultLoginWay === 'PASSWORD' ? '验证码' : '密码'
     this.loginConfig.currentWay = setting.defaultLoginWay
-    this.loginConfig.showGetCode = setting.defaultLoginWay !== 'PASSWORD'
+    this.loginConfig.showGetSMS = setting.defaultLoginWay !== 'PASSWORD'
   },
   data () {
     return {
       // 登录表单
       loginFormWithPass: {
-        tel: '',
-        nickname: 'huhuh',
+        telephone: '',
         password: ''
       },
       loginFormWithSMS: {
-        tel: '',
+        telephone: '',
         sms: ''
       },
       // 登录表单格式校验规则
       loginFormRules: {
-        tel: telRule,
-        code: codeRule,
+        telephone: telRule,
+        sms: smsRule,
         password: passwordRule
       },
       // 登陆方式配置
       loginConfig: {
-        showGetCode: false,
+        showGetSMS: false,
         way: '',
         currentWay: ''
       },
@@ -85,13 +84,14 @@ export default {
           if (!status) return this.$Message.error('格式错误！')
           // 发起登录请求
           // 深拷贝实现解除双向绑定
+          console.log(this.loginFormWithPass)
           const loginForm = JSON.parse(JSON.stringify(this.loginFormWithPass))
           // 加密
           loginForm.password = md5(loginForm.password)
           const { data: res } = await loginWithPassword(loginForm)
             .then(() => {
               if (res.code !== 200) return this.$Message.error(res.msg)
-              // window.sessionStorage.setItem('token', res.data.token)
+              window.sessionStorage.setItem('token', res.data.token)
               this.$Message.success(res.msg)
               this.$router.push('/home')
             })
@@ -100,20 +100,21 @@ export default {
         this.$refs.loginFormWithSMSRef.validate(async status => {
           if (!status) return this.$Message.error('格式错误！')
           // 发起登录请求
-          const { data: res } = await loginWithSMS(this.loginFormWithSMS)
-            .then(() => {
-              if (res.code !== 200) return this.$Message.error(res.msg)
-              window.sessionStorage.setItem('token', res.data.token)
-              this.$Message.success(res.msg)
+          await loginWithSMS(this.loginFormWithSMS)
+            .then(res => {
+              const { data } = res
+              if (data.code !== 200) return this.$Message.error(data.msg)
+              window.sessionStorage.setItem('token', data.data.token)
+              this.$Message.success(data.msg)
               this.$router.push('/home')
             })
         })
       }
     },
     // 获取验证码
-    async handleGetCode () {
-      const codeBtn = document.getElementById('get-code')
-      const { data: res } = await getCode(this.loginForm.tel)
+    async handleGetSMS () {
+      const smsBtn = document.getElementById('get-sms')
+      const { data: res } = await getSMS(this.loginFormWithSMS.telephone)
         .then(() => {
           if (res.code === 200) {
             this.$Message.success(res.msg)
@@ -122,26 +123,27 @@ export default {
             return
           }
           if (this.waitTime === 0) {
-            codeBtn.removeAttribute('disabled')
-            codeBtn.innerHTML = '获取验证码'
+            smsBtn.removeAttribute('disabled')
+            smsBtn.innerHTML = '获取验证码'
             this.waitTime = 60
           } else {
-            codeBtn.setAttribute('disabled', true)
-            codeBtn.innerHTML = this.waitTime + '秒后获取'
+            smsBtn.setAttribute('disabled', true)
+            smsBtn.innerHTML = this.waitTime + '秒后获取'
             this.waitTime--
             setTimeout(() => {
-              this.handleSendCode()
+              this.handleSendSMS()
             }, 1000)
           }
         })
     },
     // 切换登录方式
     switchLoginWay () {
-      this.loginConfig.showGetCode = this.loginConfig.currentWay === 'PASSWORD'
+      this.loginConfig.showGetSMS = this.loginConfig.currentWay === 'PASSWORD'
       this.loginConfig.way = this.loginConfig.currentWay === 'PASSWORD' ? '密码' : '验证码'
-      this.loginConfig.currentWay = this.loginConfig.currentWay === 'PASSWORD' ? 'CODE' : 'PASSWORD'
+      this.loginConfig.currentWay = this.loginConfig.currentWay === 'PASSWORD' ? 'SMS' : 'PASSWORD'
       // 重置表单
-      this.$refs.loginFormRef.resetFields()
+      this.$refs.loginFormWithPassRef.resetFields()
+      this.$refs.loginFormWithSMSRef.resetFields()
     },
     switchToRegister () {
       this.$store.commit('switchLoginOrRegister')

@@ -4,7 +4,7 @@
     <Menu mode="horizontal" active-name="1">
       <!-- 左侧菜单 -->
       <div class="left-menu-item">
-        <router-link to="home" style="color: #3a3a3a">
+        <router-link to="/home" style="color: #3a3a3a">
           <Logo></Logo>
         </router-link>
         <MenuItem name="1">

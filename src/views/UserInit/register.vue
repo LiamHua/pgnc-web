@@ -7,8 +7,8 @@
         <Input placeholder="昵称" type="text" maxlength="10" v-model="registerForm.nickname" />
       </FormItem>
       <!-- 用户账号（手机号） -->
-      <FormItem prop="tel">
-        <Input class="number" placeholder="手机号" type="number" maxlength="11" v-model="registerForm.tel" />
+      <FormItem prop="telephone">
+        <Input class="number" placeholder="手机号" type="number" maxlength="11" v-model="registerForm.telephone" />
       </FormItem>
       <!-- 密码 -->
       <FormItem prop="password">
@@ -19,8 +19,8 @@
         <Input placeholder="请重复密码" type="password" maxlength="15" v-model="secondPassword" @on-blur="verifyPassword" />
       </FormItem>
       <!-- 验证码 -->
-      <FormItem prop="code">
-        <Input class="number" placeholder="验证码" type="number" maxlength="4" v-model="registerForm.code" />
+      <FormItem prop="sms">
+        <Input class="number" placeholder="验证码" type="number" maxlength="4" v-model="registerForm.sms" />
       </FormItem>
       <!-- 获取验证码与提交注册按钮 -->
       <div class="submit">
@@ -44,16 +44,16 @@ export default {
       // 注册表单
       registerForm: {
         nickname: '',
-        tel: '',
+        telephone: '',
         password: '',
-        code: ''
+        sms: ''
       },
       // 注册表单验证规则
       registerFormRules: {
         nickname: nicknameRule,
-        tel: telRule,
+        telephone: telRule,
         password: passwordRule,
-        code: codeRule
+        sms: codeRule
       },
       // 第二次输入的密码，用于密码校对
       secondPassword: '',
@@ -64,7 +64,7 @@ export default {
   methods: {
     async handleGetCode () {
       const codeBtn = document.getElementById('get-code')
-      const { data: res } = await getCode(this.registerForm.tel)
+      const { data: res } = await getCode(this.registerForm.telephone)
         .then(() => {
           if (res.code === 200) {
             this.$Message.success(res.msg)
@@ -104,7 +104,7 @@ export default {
         const registerForm = JSON.parse(JSON.stringify(this.registerForm))
         // 加密
         registerForm.password = md5(registerForm.password)
-        const { data: res } = await register(this.registerForm)
+        const { data: res } = await register(registerForm)
           .then(() => {
             if (res.code !== 200) return this.$Message.error(res.msg)
             this.$Message.success(res.msg)
