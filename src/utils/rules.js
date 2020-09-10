@@ -19,7 +19,7 @@ export const passwordRule = [
 ]
 
 // 验证码校验
-export const codeRule = [
+export const smsRule = [
   { required: true, message: '请输入验证码', trigger: 'blur' },
   { min: 4, max: 4, message: '请输入正确的验证码', trigger: 'blur' }
 ]

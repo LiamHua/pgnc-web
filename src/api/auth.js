@@ -1,8 +1,16 @@
 import request from '@/utils/request'
 
+export function register (registerForm) {
+  return request({
+    url: '/auth/register',
+    method: 'post',
+    data: registerForm
+  })
+}
+
 export function loginWithSMS (loginForm) {
   return request({
-    url: 'auth/login',
+    url: '/auth/loginWithSMS',
     method: 'post',
     data: loginForm
   })
@@ -10,17 +18,17 @@ export function loginWithSMS (loginForm) {
 
 export function loginWithPassword (loginForm) {
   return request({
-    url: 'auth/login',
+    url: '/auth/loginWithPassword',
     method: 'post',
     data: loginForm
   })
 }
 
-export function getCode (tel) {
+export function getSMS (tel) {
   return request({
-    url: 'auth/getCode',
-    method: 'post',
-    data: { tel }
+    url: 'auth/getSMS/' + tel,
+    method: 'get',
+    data: {}
   })
 }
 
