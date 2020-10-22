@@ -102,7 +102,7 @@ export default {
         qq: '1120601455',
         introduce: '刚入手不久，全新'
       },
-      bigImage: 'http://suo.im/6qfmAU',
+      bigImage: 'http://suo.im/6xLCIX',
       comments: [
         {
           id: '',
