@@ -34,7 +34,7 @@
     "eslint-plugin-vue": "^6.2.2",
     "less": "^2.x",
     "less-loader": "^4.x",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "sass-loader": "^8.0.2",
     "vue-cli-plugin-viewui": "^2.0.0",
     "vue-template-compiler": "^2.6.11"
